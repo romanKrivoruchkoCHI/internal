@@ -1,0 +1,31 @@
+<app-header></app-header>
+<app-tab-header></app-tab-header>
+<div class="container" style="width: 100%">
+    <div class="row technologies-header">
+        <div class="col-xs" [ngClass]="{active: nameOrder=='name'}" (click)="onFilter('name')">
+            Technology <i class="fa" [ngClass]="nameOrder=='name' && isSort ? 'fa-caret-down' : 'fa-caret-up'" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="row technologies-header">
+        <div class="col-xs">
+            <input type="text"
+                   placeholder="Type to search..."
+                   class="form-control"
+                   (change)="onSearchChange($event, 'name')"
+                   value="{{ name }}">
+        </div>
+    </div>
+    <div infinite-scroll
+         (scrolled)="onScrollDown()"
+         (scrolledUp)="onScrollUp()"
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="200"
+         class="technology-content"
+    >
+        <div class="row" *ngFor="let technology of technologies">
+            <div class="col-xs">
+                <a [routerLink]="['/users', {technology: technology.name}]" [routerLinkActive]="['active']">{{ technology.name }}</a>
+            </div>
+        </div>
+    </div>
+</div>

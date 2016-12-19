@@ -1,0 +1,12 @@
+<app-header></app-header>
+<div *ngIf="technology">
+    <h2>{{ technology.name }}</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs">name</div>
+            <div class="col-xs">{{ technology.name }}</div>
+        </div>
+    </div>
+    <button class="btn btn-warning" (click)="goBack()">Back</button>
+    <button class="btn btn-primary">Edit</button>
+</div>

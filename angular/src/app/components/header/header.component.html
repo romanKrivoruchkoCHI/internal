@@ -1,0 +1,7 @@
+<nav class="navbar navbar-dark bg-inverse">
+    <a class="navbar-brand" [routerLink]="['/']">Technology list</a>
+    <span class="navbar-text float-xs-right">
+        <button [routerLink]="['/user', user.id]" class="btn btn-outline-info">{{user.first_name}} {{user.last_name}}</button>
+        <button (click)="doLogout()" type="button" class="btn btn-outline-secondary">Logout</button>
+    </span>
+</nav>

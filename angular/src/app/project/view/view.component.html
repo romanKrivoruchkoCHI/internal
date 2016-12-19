@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div *ngIf="project">
+    <h2>{{ project.name }}</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs">name</div>
+            <div class="col-xs">{{ project.name }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs">description</div>
+            <div class="col-xs">{{ project.description }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs">start date</div>
+            <div class="col-xs">{{ project.start_date }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs">end date</div>
+            <div class="col-xs">{{ project.end_date }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs">type</div>
+            <div class="col-xs" *ngFor="let type of types">
+                <span *ngIf="type.key == project.type">{{ type.name }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs">status</div>
+            <div class="col-xs" *ngFor="let status of statuses">
+                <span *ngIf="status.key == project.status">{{ status.name }}</span>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-warning" (click)="goBack()">Back</button>
+    <button [routerLink]="['/project/edit', project.id]" class="btn btn-primary">Edit</button>
+</div>

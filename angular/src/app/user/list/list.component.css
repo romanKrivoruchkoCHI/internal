@@ -1,0 +1,25 @@
+div.active {
+    color: #0275d8;
+}
+
+div.active i {
+    color: #0275d8;
+}
+
+.container {
+    margin-top: 5px;
+}
+
+.users-header {
+    background-color: #eceeef;
+    padding-bottom: 5px;
+}
+
+.user-filter, i {
+    cursor: pointer;
+}
+
+.users-content {
+    height: 100%;
+    margin-right: -15px;
+}

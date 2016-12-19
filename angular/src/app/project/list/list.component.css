@@ -1,0 +1,29 @@
+div.active {
+    color: #0275d8;
+}
+
+div.active i {
+    color: #0275d8;
+}
+
+select.form-control {
+    width: 160px;
+}
+
+.container {
+    margin-top: 5px;
+}
+
+.projects-header {
+    background-color: #eceeef;
+    padding-bottom: 5px;
+}
+
+.project-filter, i {
+    cursor: pointer;
+}
+
+.projects-content {
+    height: 100%;
+    margin-right: -15px;
+}

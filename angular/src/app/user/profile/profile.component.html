@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div *ngIf="user">
+    <div class="col-xs-3"> 
+	<form #myForm="ngForm">
+		<div *ngIf="saved" class="alert alert-success" role="alert">
+			User successfully updated.
+		</div>
+		<div class="form-group">
+			<label>Email</label>
+			<input disabled type="email" class="form-control" name="email" [(ngModel)]="user.email" />
+		</div>
+		<div class="form-group" [ngClass]="{'has-danger': error.first_name}">
+			<label>First Name</label>
+			<input type="text" class="form-control" name="first_name" [(ngModel)]="user.first_name" />
+			<div *ngIf="error.first_name" class="form-control-feedback">{{error.first_name}}</div>
+		</div>
+		<div class="form-group" [ngClass]="{'has-danger': error.last_name}">
+			<label>Last Name</label>
+			<input type="text" class="form-control" name="last_name" [(ngModel)]="user.last_name" />
+			<div *ngIf="error.last_name" class="form-control-feedback">{{error.last_name}}</div>
+		</div>
+		<div class="form-group">
+			<label>Department</label>
+			<select [(ngModel)]="user.department_id" name="department_id" class="form-group">
+			<option *ngFor="let department of departments" [value]="department.id" [selected]="department.id == user.department_id">
+				{{department.name}}
+			</option>
+			</select>
+		</div>
+		<tag-input
+				[(ngModel)]="user.technologiesArr"
+				[autocomplete]="true"
+				[onlyFromAutocomplete]="true"
+				[autocompleteItems]='technologiesArr'
+				(onAdd)="onItemAdded($event)"
+				(onRemove)="onRemove($event)"
+				name="departments"
+		>
+		</tag-input>
+		<button class="btn btn-warning" (click)="goBack()">Back</button>
+		<button (click)="save()" class="btn btn-success">Save</button>
+	</form>
+    </div>
+</div>

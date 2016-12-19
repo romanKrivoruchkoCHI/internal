@@ -1,0 +1,9 @@
+<tag-input
+        [(ngModel)]='searchField'
+        [autocomplete]="true"
+        [onlyFromAutocomplete]="true"
+        [autocompleteItems]='autocompliteFields'
+        (onAdd)="onItemAdded($event)"
+        (onRemove)="onRemove($event)"
+>
+</tag-input>

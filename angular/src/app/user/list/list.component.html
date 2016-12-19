@@ -1,0 +1,55 @@
+<app-header></app-header>
+<app-technology-search></app-technology-search>
+<app-tab-header></app-tab-header>
+<div class="container" style="width: 100%">
+    <div class="row users-header">
+        <div class="col-md user-filter" [ngClass]="{active: nameOrder=='last_name'}" (click)="onFilter('last_name')">
+            Name <i *ngIf="nameOrder=='last_name'" class="fa" [ngClass]="nameOrder=='last_name' && isSort ? 'fa-caret-down' : 'fa-caret-up'" aria-hidden="true"></i>
+        </div>
+        <div class="col-md">E-mail</div>
+        <div class="col-md user-filter" [ngClass]="{active: nameOrder=='department_id'}" (click)="onFilter('department_id')">
+            Department <i *ngIf="nameOrder=='department_id'" class="fa" [ngClass]="nameOrder=='department_id' && isSort ? 'fa-caret-down' : 'fa-caret-up'" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="row users-header">
+        <div class="col-md">
+            <input type="text"
+                   placeholder="Type to search..."
+                   class="form-control"
+                   (change)="onSearchChange($event, 'name')"
+                   value="{{ name }}">
+        </div>
+        <div class="col-md">
+            <input type="text"
+                   placeholder="Type to search..."
+                   class="form-control"
+                   (change)="onSearchChange($event, 'email')"
+                   value="{{ email }}">
+        </div>
+        <div class="col-md">
+            <select class="form-control" (change)="onSearchChange($event, 'department_id')">
+                <option value="">Select department...</option>
+                <option *ngFor="let department of departments"
+                        [value]="department.id"
+                        [selected]="department.id == departmentSelected">
+                    {{ department.name }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div infinite-scroll
+         (scrolled)="onScrollDown()"
+         (scrolledUp)="onScrollUp()"
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="200"
+         class="users-content"
+    >
+        <div class="row" *ngFor="let user of users">
+            <div class="col-md">
+                <a [routerLink]="['/user', user.id]" [routerLinkActive]="['active']">{{ user.last_name }} {{ user.first_name }}</a>
+            </div>
+            <div class="col-md">{{ user.email }}</div>
+            <div class="col-md">{{ user.department ? user.department.name : '' }}</div>
+        </div>
+    </div>
+</div>

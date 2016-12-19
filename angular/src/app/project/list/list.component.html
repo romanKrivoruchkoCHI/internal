@@ -1,0 +1,67 @@
+<app-header></app-header>
+<app-tab-header></app-tab-header>
+<div class="container" style="width: 100%">
+    <div class="row projects-header">
+        <div class="col-xs project-filter" [ngClass]="{active: nameOrder=='name'}" (click)="onFilter('name')">
+            Name <i *ngIf="nameOrder=='name'" class="fa" [ngClass]="nameOrder=='name' && isSort ? 'fa-caret-down' : 'fa-caret-up'"  aria-hidden="true"></i>
+        </div>
+        <div class="col-xs project-filter" [ngClass]="{active: nameOrder=='type'}" (click)="onFilter('type')">
+            Type <i *ngIf="nameOrder=='type'"  class="fa" [ngClass]="nameOrder=='type' && isSort ? 'fa-caret-down' : 'fa-caret-up'" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs project-filter" [ngClass]="{active: nameOrder=='status'}" (click)="onFilter('status')">
+            Status <i *ngIf="nameOrder=='status'" class="fa" [ngClass]="nameOrder=='status' && isSort ? 'fa-caret-down' : 'fa-caret-up'" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="row projects-header">
+        <div class="col-xs">
+            <input type="text"
+                   placeholder="Type to search..."
+                   class="form-control"
+                   (change)="onSearchChange($event, 'name')"
+                   value="{{ name }}">
+        </div>
+        <div class="col-xs">
+            <select class="form-control" (change)="onSearchChange($event, 'type')">
+                <option value="">Select type...</option>
+                <option *ngFor="let type of types"
+                        [value]="type.key"
+                        [selected]="type.key == typeSelected">
+                    {{ type.name }}
+                </option>
+            </select>
+        </div>
+        <div class="col-xs">
+            <select class="form-control" (change)="onSearchChange($event, 'status')">
+                <option value="">Select status...</option>
+                <option *ngFor="let status of statuses"
+                        [value]="status.key"
+                        [selected]="status.key == statusSelected">
+                    {{ status.name }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div infinite-scroll
+         (scrolled)="onScrollDown()"
+         (scrolledUp)="onScrollUp()"
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="200"
+         class="projects-content"
+    >
+        <div class="row" *ngFor="let project of projects">
+           <div class="col-xs">
+               <a [routerLink]="['/project', project.id]" [routerLinkActive]="['active']">{{ project.name }}</a>
+           </div>
+            <div class="col-xs">
+                <span *ngFor="let type of types">
+                    <span *ngIf="type.key == project.type">{{ type.name }}</span>
+                </span>
+            </div>
+            <div class="col-xs">
+                <span *ngFor="let status of statuses">
+                    <span *ngIf="status.key == project.status">{{ status.name }}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
